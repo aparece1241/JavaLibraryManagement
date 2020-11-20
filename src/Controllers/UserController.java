@@ -135,7 +135,7 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "pasword does'nt match");
             return login;
         }
-
+        login = true;
         JOptionPane.showConfirmDialog(null, "sucessfully login");
         return login;
     }

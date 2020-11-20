@@ -100,5 +100,9 @@ public class BookController {
             System.err.println(ex.getMessage());
         }
     }
+    
+    public static ArrayList<Book> getArrayBook(){
+        return books;
+    }
 }
 
