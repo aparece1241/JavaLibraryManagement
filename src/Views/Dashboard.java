@@ -59,12 +59,19 @@ public class Dashboard extends javax.swing.JFrame {
         Table = new javax.swing.JTable();
         jLabel3 = new javax.swing.JLabel();
         Books = new javax.swing.JPanel();
-        jPanel8 = new javax.swing.JPanel();
-        jLabel10 = new javax.swing.JLabel();
-        searchField1 = new javax.swing.JTextField();
-        search1 = new javax.swing.JButton();
+        jPanel7 = new javax.swing.JPanel();
+        jLabel11 = new javax.swing.JLabel();
+        searchField2 = new javax.swing.JTextField();
+        search2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        BarrowedBooks = new javax.swing.JPanel();
+        jPanel8 = new javax.swing.JPanel();
+        jLabel12 = new javax.swing.JLabel();
+        searchField3 = new javax.swing.JTextField();
+        search3 = new javax.swing.JButton();
+        jScrollPane3 = new javax.swing.JScrollPane();
+        jTable2 = new javax.swing.JTable();
         jPanel2 = new javax.swing.JPanel();
         books = new javax.swing.JButton();
         barrowedBooks = new javax.swing.JButton();
@@ -285,45 +292,45 @@ public class Dashboard extends javax.swing.JFrame {
         Books.setBackground(new java.awt.Color(153, 153, 153));
         Books.setPreferredSize(new java.awt.Dimension(960, 650));
 
-        jPanel8.setBackground(new java.awt.Color(102, 102, 102));
+        jPanel7.setBackground(new java.awt.Color(102, 102, 102));
 
-        jLabel10.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel10.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel10.setText("Books");
+        jLabel11.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel11.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel11.setText("Books");
 
-        searchField1.setText("Search Book ");
-        searchField1.addFocusListener(new java.awt.event.FocusAdapter() {
+        searchField2.setText("Search Book ");
+        searchField2.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
-                searchField1FocusGained(evt);
+                searchField2FocusGained(evt);
             }
         });
 
-        search1.setBackground(new java.awt.Color(102, 102, 102));
-        search1.setForeground(new java.awt.Color(255, 255, 255));
-        search1.setText("Search");
+        search2.setBackground(new java.awt.Color(102, 102, 102));
+        search2.setForeground(new java.awt.Color(255, 255, 255));
+        search2.setText("Search");
 
-        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
-        jPanel8.setLayout(jPanel8Layout);
-        jPanel8Layout.setHorizontalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(23, 23, 23)
-                .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 551, Short.MAX_VALUE)
-                .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+        javax.swing.GroupLayout jPanel7Layout = new javax.swing.GroupLayout(jPanel7);
+        jPanel7.setLayout(jPanel7Layout);
+        jPanel7Layout.setHorizontalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel11, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchField2, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(search1)
+                .addComponent(search2)
                 .addGap(69, 69, 69))
         );
-        jPanel8Layout.setVerticalGroup(
-            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel8Layout.createSequentialGroup()
+        jPanel7Layout.setVerticalGroup(
+            jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel7Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
-                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel10)
-                    .addComponent(searchField1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search1, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(22, Short.MAX_VALUE))
+                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel11)
+                    .addComponent(searchField2, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
         );
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
@@ -348,21 +355,105 @@ public class Dashboard extends javax.swing.JFrame {
         Books.setLayout(BooksLayout);
         BooksLayout.setHorizontalGroup(
             BooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
             .addGroup(BooksLayout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 1120, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(227, Short.MAX_VALUE))
+            .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         BooksLayout.setVerticalGroup(
             BooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BooksLayout.createSequentialGroup()
-                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
         Container.add(Books, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+
+        BarrowedBooks.setBackground(new java.awt.Color(153, 153, 153));
+        BarrowedBooks.setPreferredSize(new java.awt.Dimension(960, 650));
+
+        jPanel8.setBackground(new java.awt.Color(102, 102, 102));
+
+        jLabel12.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        jLabel12.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel12.setText("Barrowed Books");
+
+        searchField3.setText("Search Book ");
+        searchField3.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                searchField3FocusGained(evt);
+            }
+        });
+
+        search3.setBackground(new java.awt.Color(102, 102, 102));
+        search3.setForeground(new java.awt.Color(255, 255, 255));
+        search3.setText("Search");
+
+        javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
+        jPanel8.setLayout(jPanel8Layout);
+        jPanel8Layout.setHorizontalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(searchField3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(search3)
+                .addGap(69, 69, 69))
+        );
+        jPanel8Layout.setVerticalGroup(
+            jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel8Layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(jLabel12)
+                    .addComponent(searchField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(search3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(21, Short.MAX_VALUE))
+        );
+
+        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+
+            },
+            new String [] {
+                "id", "Title", "Author", "Genre", "YearPublished", "StockNumber"
+            }
+        ) {
+            Class[] types = new Class [] {
+                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.String.class, java.lang.Byte.class
+            };
+
+            public Class getColumnClass(int columnIndex) {
+                return types [columnIndex];
+            }
+        });
+        jScrollPane3.setViewportView(jTable2);
+
+        javax.swing.GroupLayout BarrowedBooksLayout = new javax.swing.GroupLayout(BarrowedBooks);
+        BarrowedBooks.setLayout(BarrowedBooksLayout);
+        BarrowedBooksLayout.setHorizontalGroup(
+            BarrowedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BarrowedBooksLayout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        BarrowedBooksLayout.setVerticalGroup(
+            BarrowedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(BarrowedBooksLayout.createSequentialGroup()
+                .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(7, 7, 7)
+                .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, Short.MAX_VALUE))
+        );
+
+        Container.add(BarrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
 
         jPanel2.setBackground(new java.awt.Color(2, 30, 45));
         jPanel2.setMaximumSize(new java.awt.Dimension(500, 700));
@@ -474,6 +565,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void barrowedBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barrowedBooksActionPerformed
         // TODO add your handling code here:
+        this.showBarrowedBooks();
     }//GEN-LAST:event_barrowedBooksActionPerformed
 
     private void booksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_booksActionPerformed
@@ -483,50 +575,66 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void searchFieldFocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchFieldFocusGained
         // TODO add your handling code here:
-        
-    }//GEN-LAST:event_searchFieldFocusGained
 
-    private void searchField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField1FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchField1FocusGained
+    }//GEN-LAST:event_searchFieldFocusGained
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
         // TODO add your handling code here:
         this.showDashboardFirst();
     }//GEN-LAST:event_dashboardActionPerformed
 
-    
+    private void searchField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField2FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchField2FocusGained
+
+    private void searchField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField3FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchField3FocusGained
+
     /**
      * This function shows only the dashboard panel
      */
-    private void showDashboardFirst(){
+    private void showDashboardFirst() {
         this.dashboardPanel.setVisible(true);
         this.Books.setVisible(false);
+        this.BarrowedBooks.setVisible(false);
     }
+
     /**
      * This function will show the booklist on the right side
      */
     private void showBookList() {
-        DefaultTableModel dataModel =(DefaultTableModel) Table.getModel();
-        ArrayList<Book> books = BookController.getArrayBook(); 
-        for(Book book: books){
-             dataModel.addRow(new Object[] {book.getTitle(),book.getAuthor()});
+        DefaultTableModel dataModel = (DefaultTableModel) Table.getModel();
+        ArrayList<Book> books = BookController.getArrayBook();
+        for (Book book : books) {
+            dataModel.addRow(new Object[]{book.getTitle(), book.getAuthor()});
         }
         Table.setModel(dataModel);
     }
+
     /**
      * This function will show only the books list
      */
-    private void showBooks(){
+    private void showBooks() {
         this.dashboardPanel.setVisible(false);
         this.Books.setVisible(true);
-    }
+        this.BarrowedBooks.setVisible(false);
 
+    }
+    /**
+     * Shows only the Borrowed book panel
+     */
+    private void showBarrowedBooks() {
+        this.dashboardPanel.setVisible(false);
+        this.Books.setVisible(false);
+        this.BarrowedBooks.setVisible(true);
+    }
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel BDAuthor;
     private javax.swing.JLabel BDGenre;
     private javax.swing.JLabel BDTitle;
     private javax.swing.JLabel BDYear;
+    private javax.swing.JPanel BarrowedBooks;
     private javax.swing.JPanel Books;
     private javax.swing.JPanel Container;
     private javax.swing.JTable Table;
@@ -535,7 +643,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton dashboard;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
@@ -549,19 +658,24 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel6;
+    private javax.swing.JPanel jPanel7;
     private javax.swing.JPanel jPanel8;
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JScrollPane jScrollPane2;
+    private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JTable jTable1;
+    private javax.swing.JTable jTable2;
     private javax.swing.JButton logout;
     private javax.swing.JLabel mstBBAuthor;
     private javax.swing.JLabel mstBBGenre;
     private javax.swing.JLabel mstBBTitle;
     private javax.swing.JLabel mstBBYear;
     private javax.swing.JButton search;
-    private javax.swing.JButton search1;
+    private javax.swing.JButton search2;
+    private javax.swing.JButton search3;
     private javax.swing.JTextField searchField;
-    private javax.swing.JTextField searchField1;
+    private javax.swing.JTextField searchField2;
+    private javax.swing.JTextField searchField3;
     private javax.swing.JLabel username;
     // End of variables declaration//GEN-END:variables
 }
