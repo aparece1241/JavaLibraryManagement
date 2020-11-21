@@ -106,6 +106,7 @@ public class Register extends javax.swing.JFrame {
 
         passField.setBackground(new java.awt.Color(255, 255, 255));
         passField.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
+        passField.setPreferredSize(new java.awt.Dimension(115, 27));
         passField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passFieldActionPerformed(evt);
@@ -158,6 +159,7 @@ public class Register extends javax.swing.JFrame {
         emailField.setBackground(new java.awt.Color(255, 255, 255));
         emailField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         emailField.setText("Enter Email");
+        emailField.setPreferredSize(new java.awt.Dimension(115, 27));
         jPanel2.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 190, -1));
 
         lastnameLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -168,6 +170,7 @@ public class Register extends javax.swing.JFrame {
         lastnameField1.setBackground(new java.awt.Color(255, 255, 255));
         lastnameField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lastnameField1.setText("Enter Lastname");
+        lastnameField1.setPreferredSize(new java.awt.Dimension(115, 27));
         jPanel2.add(lastnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 190, -1));
 
         passwordLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
@@ -177,6 +180,7 @@ public class Register extends javax.swing.JFrame {
 
         positionField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         positionField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "librarian" }));
+        positionField.setPreferredSize(new java.awt.Dimension(115, 27));
         positionField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 positionFieldActionPerformed(evt);
@@ -259,11 +263,13 @@ public class Register extends javax.swing.JFrame {
         String lastname = lastnameField1.getText();
         String email = emailField.getText();
         String password = passField.getText();
-        String position =  (String) positionField.getSelectedItem();
+        String position = (String) positionField.getSelectedItem();
         LoginView login = new LoginView();
-        login.setVisible(UserController.createUser(firstname, lastname, email, position, password));
-        this.setVisible(false);
-        JOptionPane.showMessageDialog(null, "Please login!");
+        if (UserController.createUser(firstname, lastname, email, position, password)) {
+            login.setVisible(true);
+            this.setVisible(false);
+            JOptionPane.showMessageDialog(null, "Please login!");
+        }
     }//GEN-LAST:event_registerButtonActionPerformed
 
     /**

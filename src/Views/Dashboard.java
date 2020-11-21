@@ -65,6 +65,7 @@ public class Dashboard extends javax.swing.JFrame {
         search2 = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        AddBook = new javax.swing.JButton();
         BarrowedBooks = new javax.swing.JPanel();
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
@@ -351,6 +352,10 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jScrollPane2.setViewportView(jTable1);
 
+        AddBook.setBackground(new java.awt.Color(0, 102, 51));
+        AddBook.setForeground(new java.awt.Color(255, 255, 255));
+        AddBook.setText("Add New Book");
+
         javax.swing.GroupLayout BooksLayout = new javax.swing.GroupLayout(Books);
         Books.setLayout(BooksLayout);
         BooksLayout.setHorizontalGroup(
@@ -358,15 +363,21 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(BooksLayout.createSequentialGroup()
                 .addContainerGap()
                 .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(227, Short.MAX_VALUE))
+                .addContainerGap(14, Short.MAX_VALUE))
             .addComponent(jPanel7, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BooksLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(AddBook, javax.swing.GroupLayout.PREFERRED_SIZE, 217, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(152, 152, 152))
         );
         BooksLayout.setVerticalGroup(
             BooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BooksLayout.createSequentialGroup()
                 .addComponent(jPanel7, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(7, 7, 7)
-                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 570, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(AddBook)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane2, javax.swing.GroupLayout.PREFERRED_SIZE, 520, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
@@ -495,6 +506,7 @@ public class Dashboard extends javax.swing.JFrame {
         });
         jPanel2.add(dashboard, new org.netbeans.lib.awtextra.AbsoluteConstraints(10, 120, 130, 60));
 
+        jLabel5.setForeground(new java.awt.Color(255, 255, 255));
         jLabel5.setText("Copyright @");
         jPanel2.add(jLabel5, new org.netbeans.lib.awtextra.AbsoluteConstraints(60, 640, 80, 30));
 
@@ -510,7 +522,13 @@ public class Dashboard extends javax.swing.JFrame {
         logout.setBackground(new java.awt.Color(91, 34, 33));
         logout.setForeground(new java.awt.Color(255, 255, 255));
         logout.setText("logout");
+        logout.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                logoutActionPerformed(evt);
+            }
+        });
 
+        jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("All Rights Reserved 2020");
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -591,6 +609,12 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_searchField3FocusGained
 
+    private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
+        // TODO add your handling code here:
+        new LoginView().setVisible(true);
+        this.setVisible(false);
+    }//GEN-LAST:event_logoutActionPerformed
+
     /**
      * This function shows only the dashboard panel
      */
@@ -630,6 +654,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.BarrowedBooks.setVisible(true);
     }
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JButton AddBook;
     private javax.swing.JLabel BDAuthor;
     private javax.swing.JLabel BDGenre;
     private javax.swing.JLabel BDTitle;
