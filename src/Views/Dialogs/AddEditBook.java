@@ -8,6 +8,7 @@ package Views.Dialogs;
 import Controllers.BookController;
 import java.sql.Date;
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  *
@@ -30,6 +31,12 @@ public class AddEditBook extends javax.swing.JDialog {
         initComponents();
         this.SaveEditBook.setText("Edit");
         this.data = data;
+        //set the data
+        this.BookTitleField.setText(data.get("title"));
+        this.BookAuthorField.setText(data.get("author"));
+        this.BookGenreField.setText(data.get("genre"));
+        this.BookYearField.setText(data.get("year"));
+        this.BockStockField.setText(data.get("stockNumber"));
     }
 
     /**
@@ -151,6 +158,11 @@ public class AddEditBook extends javax.swing.JDialog {
         CloseBookForm.setBackground(new java.awt.Color(102, 0, 0));
         CloseBookForm.setForeground(new java.awt.Color(255, 255, 255));
         CloseBookForm.setText("Close");
+        CloseBookForm.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                CloseBookFormActionPerformed(evt);
+            }
+        });
 
         jPanel4.setBackground(new java.awt.Color(255, 255, 255));
 
@@ -250,15 +262,26 @@ public class AddEditBook extends javax.swing.JDialog {
         if (BookController.validateAndBookInfo(author, genre, title, year, stock)) {
             Date yearPublished = Date.valueOf(year);
             int stockNumber = Integer.parseInt(stock);
-            
-            if (this.data != null) {
+
+            if (AddEditBook.data != null) {
                 int id = Integer.parseInt(data.get("id"));
                 BookController.updateBook(id, author, genre, title, yearPublished, stockNumber);
+                JOptionPane.showMessageDialog(this, "Successfully edited!");
+                this.setVisible(false);
                 return;
             }
             BookController.addBook(author, genre, title, yearPublished, stockNumber);
+            JOptionPane.showMessageDialog(this, "Successfully added!");
+            this.setVisible(false);
+            return;
         }
+        JOptionPane.showMessageDialog(null, "Something went wrong", "failed", JOptionPane.ERROR_MESSAGE);
     }//GEN-LAST:event_SaveEditBookActionPerformed
+
+    private void CloseBookFormActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseBookFormActionPerformed
+        // TODO add your handling code here:
+        this.setVisible(false);
+    }//GEN-LAST:event_CloseBookFormActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BockStockField;

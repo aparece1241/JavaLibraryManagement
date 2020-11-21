@@ -26,13 +26,15 @@ public class Dashboard extends javax.swing.JFrame {
      * Creates new form Dashboard
      */
     static User authuser = null;
+    AddEditBook addbook = new AddEditBook(this, true);
+
     public Dashboard() {
         initComponents();
         this.showDashboardFirst();
         this.showBookList();
         authuser = UserController.getAuthenticatedUser();
         if (authuser != null) {
-            this.username.setText(authuser.getFirstname()+" "+authuser.getLastname());
+            this.username.setText(authuser.getFirstname() + " " + authuser.getLastname());
         }
     }
 
@@ -613,6 +615,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void booksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_booksActionPerformed
         // TODO add your handling code here:
+        this.showBookList();
         this.showBooksPanel();
     }//GEN-LAST:event_booksActionPerformed
 
@@ -642,14 +645,13 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void AddBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_AddBookActionPerformed
         // TODO add your handling code here:
-        AddEditBook addbook = new AddEditBook(this, true);
         addbook.setVisible(true);
-        this.showBookList();
         this.showBooksPanel();
     }//GEN-LAST:event_AddBookActionPerformed
 
     private void BooksListTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BooksListTableMouseClicked
         // TODO add your handling code here:
+        System.out.println(this.AddBook.isShowing());
         if (evt.getButton() == 3) {
             //do something;
             try {
@@ -691,7 +693,7 @@ public class Dashboard extends javax.swing.JFrame {
     /**
      * This function will show the booklist on the right side
      */
-    private void showBookList() {
+    public void showBookList() {
         DefaultTableModel dataModel = (DefaultTableModel) Table.getModel();
         DefaultTableModel dataModelv2 = (DefaultTableModel) BooksListTable.getModel();
         dataModel.setRowCount(0);
@@ -699,7 +701,6 @@ public class Dashboard extends javax.swing.JFrame {
         Table.setModel(dataModel);
 
         BooksListTable.setModel(dataModelv2);
-        
         ArrayList<Book> books = BookController.getArrayBook();
         for (Book book : books) {
             dataModel.addRow(new Object[]{book.getTitle(), book.getAuthor()});
