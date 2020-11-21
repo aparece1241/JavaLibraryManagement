@@ -5,18 +5,31 @@
  */
 package Views.Dialogs;
 
+import Controllers.BookController;
+import java.sql.Date;
+import java.util.HashMap;
+
 /**
  *
  * @author 2ndyrGroupC
  */
-public class AddBook extends javax.swing.JDialog {
+public class AddEditBook extends javax.swing.JDialog {
 
     /**
      * Creates new form AddBook
      */
-    public AddBook(java.awt.Frame parent, boolean modal) {
+    static HashMap<String, String> data = null;
+
+    public AddEditBook(java.awt.Frame parent, boolean modal) {
         super(parent, modal);
         initComponents();
+    }
+
+    public AddEditBook(java.awt.Frame parent, boolean modal, HashMap<String, String> data) {
+        super(parent, modal);
+        initComponents();
+        this.SaveEditBook.setText("Edit");
+        this.data = data;
     }
 
     /**
@@ -45,7 +58,7 @@ public class AddBook extends javax.swing.JDialog {
         BookAuthorField = new javax.swing.JTextField();
         BookYearField = new javax.swing.JTextField();
         BockStockField = new javax.swing.JTextField();
-        SaveBook = new javax.swing.JButton();
+        SaveEditBook = new javax.swing.JButton();
         CloseBookForm = new javax.swing.JButton();
         jPanel4 = new javax.swing.JPanel();
 
@@ -87,7 +100,7 @@ public class AddBook extends javax.swing.JDialog {
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 51, Short.MAX_VALUE)
+            .addGap(0, 29, Short.MAX_VALUE)
         );
 
         BookTitleField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
@@ -114,17 +127,26 @@ public class AddBook extends javax.swing.JDialog {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Stock Number");
 
+        BookGenreField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BookGenreField.setText("Book Genre");
 
+        BookAuthorField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BookAuthorField.setText("Book Author");
 
+        BookYearField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BookYearField.setText("Year Published");
 
+        BockStockField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         BockStockField.setText("Stock Number");
 
-        SaveBook.setBackground(new java.awt.Color(0, 51, 102));
-        SaveBook.setForeground(new java.awt.Color(255, 255, 255));
-        SaveBook.setText("Save");
+        SaveEditBook.setBackground(new java.awt.Color(0, 51, 102));
+        SaveEditBook.setForeground(new java.awt.Color(255, 255, 255));
+        SaveEditBook.setText("Save");
+        SaveEditBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                SaveEditBookActionPerformed(evt);
+            }
+        });
 
         CloseBookForm.setBackground(new java.awt.Color(102, 0, 0));
         CloseBookForm.setForeground(new java.awt.Color(255, 255, 255));
@@ -140,7 +162,7 @@ public class AddBook extends javax.swing.JDialog {
         );
         jPanel4Layout.setVerticalGroup(
             jPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 42, Short.MAX_VALUE)
+            .addGap(0, 56, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout Container1Layout = new javax.swing.GroupLayout(Container1);
@@ -160,7 +182,7 @@ public class AddBook extends javax.swing.JDialog {
                 .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(Container1Layout.createSequentialGroup()
                         .addGap(29, 29, 29)
-                        .addComponent(SaveBook)
+                        .addComponent(SaveEditBook)
                         .addGap(18, 18, 18)
                         .addComponent(CloseBookForm))
                     .addComponent(BockStockField, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -204,10 +226,10 @@ public class AddBook extends javax.swing.JDialog {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(Container1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(CloseBookForm)
-                    .addComponent(SaveBook))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                    .addComponent(SaveEditBook))
+                .addGap(29, 29, 29)
                 .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(15, 15, 15))
+                .addContainerGap())
         );
 
         jPanel2.add(Container1, new java.awt.GridBagConstraints());
@@ -217,47 +239,26 @@ public class AddBook extends javax.swing.JDialog {
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ClassNotFoundException ex) {
-            java.util.logging.Logger.getLogger(AddBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            java.util.logging.Logger.getLogger(AddBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
-            java.util.logging.Logger.getLogger(AddBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        } catch (javax.swing.UnsupportedLookAndFeelException ex) {
-            java.util.logging.Logger.getLogger(AddBook.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void SaveEditBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_SaveEditBookActionPerformed
+        // TODO add your handling code here:
 
-        /* Create and display the dialog */
-        java.awt.EventQueue.invokeLater(new Runnable() {
-            public void run() {
-                AddBook dialog = new AddBook(new javax.swing.JFrame(), true);
-                dialog.addWindowListener(new java.awt.event.WindowAdapter() {
-                    @Override
-                    public void windowClosing(java.awt.event.WindowEvent e) {
-                        System.exit(0);
-                    }
-                });
-                dialog.setVisible(true);
+        String title = this.BookTitleField.getText();
+        String author = this.BookAuthorField.getText();
+        String genre = this.BookGenreField.getText();
+        String year = this.BookYearField.getText();
+        String stock = this.BockStockField.getText();
+        if (BookController.validateAndBookInfo(author, genre, title, year, stock)) {
+            Date yearPublished = Date.valueOf(year);
+            int stockNumber = Integer.parseInt(stock);
+            
+            if (this.data != null) {
+                int id = Integer.parseInt(data.get("id"));
+                BookController.updateBook(id, author, genre, title, yearPublished, stockNumber);
+                return;
             }
-        });
-    }
+            BookController.addBook(author, genre, title, yearPublished, stockNumber);
+        }
+    }//GEN-LAST:event_SaveEditBookActionPerformed
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JTextField BockStockField;
@@ -269,7 +270,7 @@ public class AddBook extends javax.swing.JDialog {
     private javax.swing.JTextField BookYearField;
     private javax.swing.JButton CloseBookForm;
     private javax.swing.JPanel Container1;
-    private javax.swing.JButton SaveBook;
+    private javax.swing.JButton SaveEditBook;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel4;

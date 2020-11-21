@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class UserController {
-
+    private static User authenticatedUser = null;
     private static Connection dbConnection;
     static ArrayList<User> users = new ArrayList<User>();
 
@@ -120,7 +120,6 @@ public class UserController {
         User chooseUser = null;
         //find the user email
         for (User user : users) {
-            System.out.println(user.getEmail());
             if (user.getEmail().equals(email)) {
                 chooseUser = user;
                 break;
@@ -135,6 +134,7 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "pasword does'nt match");
             return login;
         }
+        authenticatedUser = chooseUser;
         login = true;
         JOptionPane.showMessageDialog(null, "sucessfully login");
         return login;
@@ -158,5 +158,9 @@ public class UserController {
         registered = true;
         JOptionPane.showMessageDialog(null, "Successfully registered");
         return registered;
+    }
+    
+    public static User getAuthenticatedUser(){
+        return authenticatedUser;
     }
 }

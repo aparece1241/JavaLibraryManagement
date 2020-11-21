@@ -278,9 +278,8 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String email = emailField.getText();
         String password = passField.getText();
-        Dashboard dashboard = new Dashboard();
         if (UserController.userDoLogin(email, password)) {
-            dashboard.setVisible(true);
+            new Dashboard().setVisible(true);
             this.setVisible(false);
         }
 

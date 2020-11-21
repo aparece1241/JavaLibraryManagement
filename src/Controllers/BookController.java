@@ -9,6 +9,9 @@ import java.sql.ResultSet;
 import java.sql.Statement;
 import java.util.ArrayList;
 import java.sql.Date;
+import java.sql.SQLException;
+import javax.swing.JOptionPane;
+import jdk.nashorn.internal.codegen.CompilerConstants;
 
 public class BookController {
     private static Connection dbConnection;
@@ -18,6 +21,12 @@ public class BookController {
         dbConnection = Db_Connection.getConnection();
     }
 
+    
+    //retrieve and set 
+    
+    private static void retrieveAfter(){
+        books = getBooks();
+    }
     //retrieve all books
     //temporary
     public static ArrayList<Book> getBooks() {
@@ -39,7 +48,7 @@ public class BookController {
             }
             Db_Connection.close(result);
             System.out.println("Successfully retrieved!");
-        }catch (Exception ex) {
+        }catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
         return books;
@@ -59,8 +68,9 @@ public class BookController {
             preparedStmt.execute();
 
             Db_Connection.close(preparedStmt);
+            retrieveAfter();
             System.out.println("Successfully Added Book!");
-        }catch (Exception ex) {
+        }catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
@@ -81,8 +91,9 @@ public class BookController {
             preparedStmt.execute();
 
             System.out.println("Successfully Edited!");
+            retrieveAfter();
             Db_Connection.close(preparedStmt);
-        }catch (Exception ex) {
+        }catch (SQLException ex) {
 
             System.err.println(ex.getMessage());
         }
@@ -95,8 +106,9 @@ public class BookController {
             preparedStmt.execute();
 
             System.out.println("Successfully deleted!");
+            retrieveAfter();
             Db_Connection.close(preparedStmt);
-        }catch (Exception ex){
+        }catch (SQLException ex){
             System.err.println(ex.getMessage());
         }
     }
@@ -104,5 +116,26 @@ public class BookController {
     public static ArrayList<Book> getArrayBook(){
         return books;
     }
+    //validation
+    
+    public static boolean validateAndBookInfo(String author, String genre, String title,
+                               String yearPublished, String stockNumber){
+        boolean valid = false;
+        if("".equals(title) || "".equals(genre) || "".equals(author)
+           || "".equals(yearPublished)|| "".equals(stockNumber)){
+            JOptionPane.showConfirmDialog(null, "Plaese supply all needed information","Failed",JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+        try {
+            Date.valueOf(yearPublished);
+        }catch(Exception e){
+            JOptionPane.showMessageDialog(null, "Invalid format! Date must be (yyyy-MM-dd or yyyy/MM/dd)","Date format",
+                    JOptionPane.ERROR_MESSAGE);
+            return valid;
+        }
+       valid = true;
+       return valid;
+    }
+        
 }
 
