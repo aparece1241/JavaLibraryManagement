@@ -136,7 +136,7 @@ public class UserController {
             return login;
         }
         login = true;
-        JOptionPane.showConfirmDialog(null, "sucessfully login");
+        JOptionPane.showMessageDialog(null, "sucessfully login");
         return login;
     }
 

@@ -54,13 +54,14 @@ public class Register extends javax.swing.JFrame {
         backgroundImage = new javax.swing.JLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setResizable(false);
 
         jPanel1.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
         jPanel2.setBackground(new java.awt.Color(255, 255, 255));
         jPanel2.setLayout(new org.netbeans.lib.awtextra.AbsoluteLayout());
 
-        SignUpMessage.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
+        SignUpMessage.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
         SignUpMessage.setForeground(new java.awt.Color(102, 102, 102));
         SignUpMessage.setText("Please sign up here!");
         jPanel2.add(SignUpMessage, new org.netbeans.lib.awtextra.AbsoluteConstraints(400, 80, 218, -1));
@@ -83,40 +84,40 @@ public class Register extends javax.swing.JFrame {
 
         jPanel2.add(jPanel3, new org.netbeans.lib.awtextra.AbsoluteConstraints(547, 548, -1, -1));
 
-        emailLabel.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
-        emailLabel.setForeground(new java.awt.Color(0, 51, 255));
+        emailLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        emailLabel.setForeground(new java.awt.Color(0, 0, 0));
         emailLabel.setText("Email:");
         jPanel2.add(emailLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 220, 60, -1));
 
-        firstnameField.setBackground(new java.awt.Color(255, 204, 255));
-        firstnameField.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
+        firstnameField.setBackground(new java.awt.Color(255, 255, 255));
+        firstnameField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         firstnameField.setText("Enter Firstname");
         firstnameField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 firstnameFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 110, 190, 28));
+        jPanel2.add(firstnameField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 120, 190, 30));
 
-        passwordLabel.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
-        passwordLabel.setForeground(new java.awt.Color(0, 51, 255));
+        passwordLabel.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        passwordLabel.setForeground(new java.awt.Color(0, 0, 0));
         passwordLabel.setText("Position:");
         jPanel2.add(passwordLabel, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 320, 90, -1));
 
-        passField.setBackground(new java.awt.Color(255, 204, 255));
+        passField.setBackground(new java.awt.Color(255, 255, 255));
         passField.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
-        passField.setText("jPasswordField1");
         passField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 passFieldActionPerformed(evt);
             }
         });
-        jPanel2.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 190, -1));
+        jPanel2.add(passField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 270, 190, 30));
 
-        loginFormHeaderPanel.setBackground(new java.awt.Color(248, 148, 6));
+        loginFormHeaderPanel.setBackground(new java.awt.Color(2, 30, 45));
 
-        loginText.setFont(new java.awt.Font("Cambria Math", 3, 36)); // NOI18N
-        loginText.setForeground(new java.awt.Color(0, 51, 51));
+        loginText.setBackground(new java.awt.Color(255, 255, 255));
+        loginText.setFont(new java.awt.Font("Dialog", 1, 36)); // NOI18N
+        loginText.setForeground(new java.awt.Color(255, 255, 255));
         loginText.setText("Registration Form");
 
         javax.swing.GroupLayout loginFormHeaderPanelLayout = new javax.swing.GroupLayout(loginFormHeaderPanel);
@@ -126,7 +127,7 @@ public class Register extends javax.swing.JFrame {
             .addGroup(loginFormHeaderPanelLayout.createSequentialGroup()
                 .addGap(159, 159, 159)
                 .addComponent(loginText)
-                .addContainerGap(212, Short.MAX_VALUE))
+                .addContainerGap(218, Short.MAX_VALUE))
         );
         loginFormHeaderPanelLayout.setVerticalGroup(
             loginFormHeaderPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -138,42 +139,43 @@ public class Register extends javax.swing.JFrame {
 
         jPanel2.add(loginFormHeaderPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(0, 0, 685, -1));
 
-        registerButton.setBackground(new java.awt.Color(0, 153, 51));
-        registerButton.setFont(new java.awt.Font("Cambria Math", 1, 14)); // NOI18N
+        registerButton.setBackground(new java.awt.Color(0, 51, 51));
+        registerButton.setFont(new java.awt.Font("Dialog", 1, 14)); // NOI18N
+        registerButton.setForeground(new java.awt.Color(255, 255, 255));
         registerButton.setText("Register");
         registerButton.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 registerButtonActionPerformed(evt);
             }
         });
-        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(460, 380, -1, 36));
+        jPanel2.add(registerButton, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 380, 190, 36));
 
-        firstnameLabel1.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
-        firstnameLabel1.setForeground(new java.awt.Color(0, 51, 255));
+        firstnameLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        firstnameLabel1.setForeground(new java.awt.Color(0, 0, 0));
         firstnameLabel1.setText("Firstname:");
         jPanel2.add(firstnameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 120, -1, -1));
 
-        emailField.setBackground(new java.awt.Color(255, 204, 255));
-        emailField.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
-        emailField.setText("Enter Lastname");
+        emailField.setBackground(new java.awt.Color(255, 255, 255));
+        emailField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        emailField.setText("Enter Email");
         jPanel2.add(emailField, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 220, 190, -1));
 
-        lastnameLabel1.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
-        lastnameLabel1.setForeground(new java.awt.Color(0, 51, 255));
+        lastnameLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        lastnameLabel1.setForeground(new java.awt.Color(0, 0, 0));
         lastnameLabel1.setText("Lastname:");
         jPanel2.add(lastnameLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 170, -1, -1));
 
-        lastnameField1.setBackground(new java.awt.Color(255, 204, 255));
-        lastnameField1.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
+        lastnameField1.setBackground(new java.awt.Color(255, 255, 255));
+        lastnameField1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         lastnameField1.setText("Enter Lastname");
         jPanel2.add(lastnameField1, new org.netbeans.lib.awtextra.AbsoluteConstraints(430, 170, 190, -1));
 
-        passwordLabel1.setFont(new java.awt.Font("Cambria Math", 3, 18)); // NOI18N
-        passwordLabel1.setForeground(new java.awt.Color(0, 51, 255));
+        passwordLabel1.setFont(new java.awt.Font("Dialog", 0, 18)); // NOI18N
+        passwordLabel1.setForeground(new java.awt.Color(0, 0, 0));
         passwordLabel1.setText("Password:");
         jPanel2.add(passwordLabel1, new org.netbeans.lib.awtextra.AbsoluteConstraints(320, 270, -1, -1));
 
-        positionField.setFont(new java.awt.Font("Cambria Math", 0, 14)); // NOI18N
+        positionField.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
         positionField.setModel(new javax.swing.DefaultComboBoxModel<>(new String[] { "admin", "librarian" }));
         positionField.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
@@ -184,10 +186,10 @@ public class Register extends javax.swing.JFrame {
 
         jPanel1.add(jPanel2, new org.netbeans.lib.awtextra.AbsoluteConstraints(70, 120, 640, 460));
 
-        HeaderPanel.setBackground(new java.awt.Color(248, 148, 6));
+        HeaderPanel.setBackground(new java.awt.Color(0, 51, 51));
 
-        Titletext.setFont(new java.awt.Font("Cambria Math", 3, 48)); // NOI18N
-        Titletext.setForeground(new java.awt.Color(0, 51, 51));
+        Titletext.setFont(new java.awt.Font("Dialog", 1, 48)); // NOI18N
+        Titletext.setForeground(new java.awt.Color(255, 255, 255));
         Titletext.setText("Library Management System");
 
         jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/image/img2.jpg"))); // NOI18N

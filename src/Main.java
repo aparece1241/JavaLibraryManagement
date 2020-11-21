@@ -1,7 +1,9 @@
 import Controllers.*;
 import Utilities.Db_Connection;
+import Views.LoginView;
 
 import java.util.HashMap;
+import javax.swing.JOptionPane;
 
 /**
  * This is the main class that
@@ -17,6 +19,7 @@ public class Main {
 
         if(connectionResults.get("error").equals("true")){
             // for dev
+            JOptionPane.showMessageDialog(null,"Something went Wrong!");
             System.err.printf("ERROR: %s", connectionResults.get("message"));
             System.exit(0);
         }
@@ -28,10 +31,7 @@ public class Main {
         System.out.println(connectionResults.get("message"));
         UserController.retrieveAllUsers();
         BookController.getBooks();
-        //create an instance of the app
-        App app = new App();
-
-        app.login();
-
+        LoginView login = new LoginView();
+        login.setVisible(true);
     }
 }
