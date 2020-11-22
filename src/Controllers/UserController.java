@@ -9,6 +9,7 @@ import javax.swing.JOptionPane;
 
 public class UserController {
 
+    private static User authenticatedUser = null;
     private static Connection dbConnection;
     static ArrayList<User> users = new ArrayList<User>();
 
@@ -115,12 +116,53 @@ public class UserController {
         }
     }
 
+    public static int addBorrower(String firstname, String lastname, String email) throws SQLException {
+        int borrowerId = 0;
+        try {
+            String query = "INSERT INTO `borrower`(`firstname`,`lastname`,`email`,`fine`) VALUES(?,?,?,?)";
+            PreparedStatement preparedStmt = dbConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStmt.setString(1, firstname);
+            preparedStmt.setString(2, lastname);
+            preparedStmt.setString(3, email);
+            preparedStmt.setInt(4, 0);
+            preparedStmt.execute();
+            ResultSet rs = preparedStmt.getGeneratedKeys();
+            if (rs.next()) {
+                borrowerId = rs.getInt(1);
+            }
+            Db_Connection.close(preparedStmt);
+            System.out.println("Successfully Added!");
+            Db_Connection.close(rs);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return borrowerId;
+    }
+
+    public static int deleteBorrower(int id) {
+        int borrowerId = 0;
+        try {
+            String query = "DELETE FROM `borrower` WHERE borrowerId=?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.getGeneratedKeys();
+            if (rs.next()) {
+                id = rs.getInt(1);
+            }
+            System.out.println("Successfully deleted!");
+            Db_Connection.close(preparedStatement);
+            Db_Connection.close(rs);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return borrowerId;
+    }
+
     public static boolean userDoLogin(String email, String password) {
         boolean login = false;
         User chooseUser = null;
         //find the user email
         for (User user : users) {
-            System.out.println(user.getEmail());
             if (user.getEmail().equals(email)) {
                 chooseUser = user;
                 break;
@@ -135,6 +177,7 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "pasword does'nt match");
             return login;
         }
+        authenticatedUser = chooseUser;
         login = true;
         JOptionPane.showMessageDialog(null, "sucessfully login");
         return login;
@@ -143,8 +186,8 @@ public class UserController {
     public static boolean createUser(String firstname, String lastname, String email,
             String position, String password) {
         boolean registered = false;
-        if (firstname == "" || lastname == "" || position == ""
-                || password == "" || email == "") {
+        if ("".equals(firstname) || "".equals(lastname) || "".equals(position)
+                || "".equals(password) || "".equals(email)) {
             JOptionPane.showMessageDialog(null, "Please supply all the fields!");
             return registered;
         }
@@ -153,10 +196,30 @@ public class UserController {
             JOptionPane.showMessageDialog(null, "Please add a valid email!");
             return registered;
         }
-        
+
         addUser(firstname, lastname, email, position, password);
         registered = true;
         JOptionPane.showMessageDialog(null, "Successfully registered");
         return registered;
+    }
+
+    public static boolean validateBorrower(String firstname, String lastname, String email) {
+        boolean valid = false;
+        if (firstname.equals("") || lastname.equals("") || email.equals("")) {
+            JOptionPane.showMessageDialog(null, "Please provide the needed information!");
+            return valid;
+        }
+        String regex = "^[\\w-_\\.+]*[\\w-_\\.]\\@([\\w]+\\.)+[\\w]+[\\w]$";
+        if (!email.matches(regex)) {
+            JOptionPane.showMessageDialog(null, "Please add a valid email!");
+            return valid;
+        }
+
+        valid = true;
+        return valid;
+    }
+
+    public static User getAuthenticatedUser() {
+        return authenticatedUser;
     }
 }

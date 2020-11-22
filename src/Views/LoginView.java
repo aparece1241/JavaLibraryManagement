@@ -7,7 +7,6 @@ package Views;
 
 import Controllers.UserController;
 
-
 /**
  *
  * @author 1styrGroupB
@@ -279,9 +278,11 @@ public class LoginView extends javax.swing.JFrame {
         // TODO add your handling code here:
         String email = emailField.getText();
         String password = passField.getText();
-        Dashboard dashboard = new Dashboard();
-        dashboard.setVisible(UserController.userDoLogin(email, password));
-        this.setVisible(false);
+        if (UserController.userDoLogin(email, password)) {
+            new Dashboard().setVisible(true);
+            this.setVisible(false);
+        }
+
     }//GEN-LAST:event_loginButtonActionPerformed
 
     private void registerButtonActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_registerButtonActionPerformed
