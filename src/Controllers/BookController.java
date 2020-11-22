@@ -11,17 +11,15 @@ import java.util.ArrayList;
 import java.sql.Date;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
-import jdk.nashorn.internal.codegen.CompilerConstants;
+
 
 public class BookController {
     private static Connection dbConnection;
-    private static ArrayList<Book> books = new ArrayList<Book>();
+    private static ArrayList<Book> books;
 
     public BookController() {
         dbConnection = Db_Connection.getConnection();
-    }
-
-    
+    } 
     //retrieve and set 
     
     private static void retrieveAfter(){
@@ -30,6 +28,7 @@ public class BookController {
     //retrieve all books
     //temporary
     public static ArrayList<Book> getBooks() {
+        books = new ArrayList<>();
         try {
             String query = "SELECT * FROM `book`";
             Statement stmt = dbConnection.createStatement();

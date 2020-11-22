@@ -266,12 +266,12 @@ public class AddEditBook extends javax.swing.JDialog {
             if (AddEditBook.data != null) {
                 int id = Integer.parseInt(data.get("id"));
                 BookController.updateBook(id, author, genre, title, yearPublished, stockNumber);
-                JOptionPane.showMessageDialog(this, "Successfully edited!");
+                JOptionPane.showMessageDialog(this, "Successfully edited!,Please click refresh");
                 this.setVisible(false);
                 return;
             }
             BookController.addBook(author, genre, title, yearPublished, stockNumber);
-            JOptionPane.showMessageDialog(this, "Successfully added!");
+            JOptionPane.showMessageDialog(this, "Successfully added!, Please Click refresh");
             this.setVisible(false);
             return;
         }
