@@ -8,10 +8,15 @@ package Views;
 import Controllers.BookController;
 import Controllers.UserController;
 import Models.Book;
+import Models.BorrowedBook;
 import Models.User;
+import Utilities.Db_Connection;
 import java.sql.Date;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 import sun.swing.table.DefaultTableCellHeaderRenderer;
@@ -85,9 +90,10 @@ public class Dashboard extends javax.swing.JFrame {
         jPanel8 = new javax.swing.JPanel();
         jLabel12 = new javax.swing.JLabel();
         searchField3 = new javax.swing.JTextField();
-        search3 = new javax.swing.JButton();
+        searchBorrowedBook = new javax.swing.JButton();
         jScrollPane3 = new javax.swing.JScrollPane();
-        jTable2 = new javax.swing.JTable();
+        BorrowedBookTable = new javax.swing.JTable();
+        jButton2 = new javax.swing.JButton();
         AddEditBookForm = new javax.swing.JPanel();
         jPanel9 = new javax.swing.JPanel();
         jLabel13 = new javax.swing.JLabel();
@@ -123,12 +129,12 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel23 = new javax.swing.JLabel();
         jPanel17 = new javax.swing.JPanel();
         jLabel26 = new javax.swing.JLabel();
-        BorrowerFirstname1 = new javax.swing.JTextField();
+        BorrowerFirstname = new javax.swing.JTextField();
         BookTitle3 = new javax.swing.JLabel();
         jLabel24 = new javax.swing.JLabel();
         BookAuthor3 = new javax.swing.JLabel();
-        BorrowerLastname1 = new javax.swing.JTextField();
-        BorrowerEmail1 = new javax.swing.JTextField();
+        BorrowerLastname = new javax.swing.JTextField();
+        BorrowerEmail = new javax.swing.JTextField();
         BarrowBook1 = new javax.swing.JButton();
         CloseBookForm2 = new javax.swing.JButton();
         jPanel2 = new javax.swing.JPanel();
@@ -180,7 +186,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel6Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
                 .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search)
@@ -194,7 +200,7 @@ public class Dashboard extends javax.swing.JFrame {
                     .addComponent(jLabel2)
                     .addComponent(searchField, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(search, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addContainerGap(21, Short.MAX_VALUE))
+                .addContainerGap(38, Short.MAX_VALUE))
         );
 
         jLabel9.setFont(new java.awt.Font("Dialog", 1, 18)); // NOI18N
@@ -318,11 +324,13 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap()
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
+                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
+                    .addGroup(dashboardPanelLayout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(85, 85, 85)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 22, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(51, 51, 51)))
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -334,18 +342,18 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(40, 40, 40)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 376, Short.MAX_VALUE)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 359, Short.MAX_VALUE)
                         .addContainerGap())
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
                         .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 51, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
                         .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGap(25, 25, 25))))
         );
 
-        Container.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+        Container.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         Books.setBackground(new java.awt.Color(153, 153, 153));
         Books.setPreferredSize(new java.awt.Dimension(960, 650));
@@ -479,7 +487,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(14, 14, 14))
         );
 
-        Container.add(Books, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+        Container.add(Books, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         BarrowedBooks.setBackground(new java.awt.Color(153, 153, 153));
         BarrowedBooks.setPreferredSize(new java.awt.Dimension(960, 650));
@@ -490,28 +498,33 @@ public class Dashboard extends javax.swing.JFrame {
         jLabel12.setForeground(new java.awt.Color(255, 255, 255));
         jLabel12.setText("Barrowed Books");
 
-        searchField3.setText("Search Book ");
+        searchField3.setText("Search borrowed book ");
         searchField3.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 searchField3FocusGained(evt);
             }
         });
+        searchField3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchField3ActionPerformed(evt);
+            }
+        });
 
-        search3.setBackground(new java.awt.Color(102, 102, 102));
-        search3.setForeground(new java.awt.Color(255, 255, 255));
-        search3.setText("Search");
+        searchBorrowedBook.setBackground(new java.awt.Color(102, 102, 102));
+        searchBorrowedBook.setForeground(new java.awt.Color(255, 255, 255));
+        searchBorrowedBook.setText("Search");
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
         jPanel8Layout.setHorizontalGroup(
             jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel8Layout.createSequentialGroup()
-                .addGap(18, 18, 18)
+                .addGap(22, 22, 22)
                 .addComponent(jLabel12, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(searchField3, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(search3)
+                .addComponent(searchBorrowedBook)
                 .addGap(69, 69, 69))
         );
         jPanel8Layout.setVerticalGroup(
@@ -521,11 +534,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGroup(jPanel8Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel12)
                     .addComponent(searchField3, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(search3, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(searchBorrowedBook, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addContainerGap(21, Short.MAX_VALUE))
         );
 
-        jTable2.setModel(new javax.swing.table.DefaultTableModel(
+        BorrowedBookTable.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
@@ -548,7 +561,21 @@ public class Dashboard extends javax.swing.JFrame {
                 return canEdit [columnIndex];
             }
         });
-        jScrollPane3.setViewportView(jTable2);
+        BorrowedBookTable.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                BorrowedBookTableMouseClicked(evt);
+            }
+        });
+        jScrollPane3.setViewportView(BorrowedBookTable);
+
+        jButton2.setBackground(new java.awt.Color(0, 102, 51));
+        jButton2.setForeground(new java.awt.Color(255, 255, 255));
+        jButton2.setText("Borrow Book/s");
+        jButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                jButton2ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout BarrowedBooksLayout = new javax.swing.GroupLayout(BarrowedBooks);
         BarrowedBooks.setLayout(BarrowedBooksLayout);
@@ -559,17 +586,23 @@ public class Dashboard extends javax.swing.JFrame {
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 950, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addComponent(jPanel8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, BarrowedBooksLayout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 222, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(145, 145, 145))
         );
         BarrowedBooksLayout.setVerticalGroup(
             BarrowedBooksLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BarrowedBooksLayout.createSequentialGroup()
                 .addComponent(jPanel8, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(50, 50, 50)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jScrollPane3, javax.swing.GroupLayout.PREFERRED_SIZE, 509, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, Short.MAX_VALUE))
         );
 
-        Container.add(BarrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+        Container.add(BarrowedBooks, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         AddEditBookForm.setBackground(new java.awt.Color(153, 153, 153));
         AddEditBookForm.setPreferredSize(new java.awt.Dimension(960, 650));
@@ -800,7 +833,7 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        Container.add(AddEditBookForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+        Container.add(AddEditBookForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         BarrowerForm.setBackground(new java.awt.Color(153, 153, 153));
         BarrowerForm.setPreferredSize(new java.awt.Dimension(960, 650));
@@ -818,17 +851,18 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(348, 348, 348))
+                .addGap(553, 553, 553))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel12Layout.createSequentialGroup()
-                .addGap(22, 22, 22)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
+                .addContainerGap(28, Short.MAX_VALUE)
                 .addComponent(jLabel16)
-                .addContainerGap(24, Short.MAX_VALUE))
+                .addGap(18, 18, 18))
         );
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
+        jPanel13.setPreferredSize(new java.awt.Dimension(960, 650));
         jPanel13.setLayout(new java.awt.GridBagLayout());
 
         Container3.setBackground(new java.awt.Color(102, 102, 102));
@@ -868,6 +902,11 @@ public class Dashboard extends javax.swing.JFrame {
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
+            }
+        });
+        SelectBook.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                SelectBookMouseClicked(evt);
             }
         });
         jScrollPane4.setViewportView(SelectBook);
@@ -933,11 +972,11 @@ public class Dashboard extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
 
-        BorrowerFirstname1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        BorrowerFirstname1.setText("First Name");
-        BorrowerFirstname1.addActionListener(new java.awt.event.ActionListener() {
+        BorrowerFirstname.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BorrowerFirstname.setText("First Name");
+        BorrowerFirstname.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                BorrowerFirstname1ActionPerformed(evt);
+                BorrowerFirstnameActionPerformed(evt);
             }
         });
 
@@ -954,11 +993,11 @@ public class Dashboard extends javax.swing.JFrame {
         BookAuthor3.setForeground(new java.awt.Color(255, 255, 255));
         BookAuthor3.setText("email");
 
-        BorrowerLastname1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        BorrowerLastname1.setText("Last Name");
+        BorrowerLastname.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BorrowerLastname.setText("Last Name");
 
-        BorrowerEmail1.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
-        BorrowerEmail1.setText("Email");
+        BorrowerEmail.setFont(new java.awt.Font("Dialog", 0, 14)); // NOI18N
+        BorrowerEmail.setText("Email");
 
         BarrowBook1.setBackground(new java.awt.Color(0, 51, 102));
         BarrowBook1.setForeground(new java.awt.Color(255, 255, 255));
@@ -992,9 +1031,9 @@ public class Dashboard extends javax.swing.JFrame {
                             .addComponent(BookAuthor3))
                         .addGap(67, 67, 67)
                         .addGroup(Container4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(BorrowerEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BorrowerLastname1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(BorrowerFirstname1, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(BorrowerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BorrowerLastname, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(BorrowerFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, 179, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, Container4Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
@@ -1019,15 +1058,15 @@ public class Dashboard extends javax.swing.JFrame {
                 .addGap(49, 49, 49)
                 .addGroup(Container4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BookTitle3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(BorrowerFirstname1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BorrowerFirstname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(47, 47, 47)
                 .addGroup(Container4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jLabel24)
-                    .addComponent(BorrowerLastname1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BorrowerLastname, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(44, 44, 44)
                 .addGroup(Container4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BookAuthor3)
-                    .addComponent(BorrowerEmail1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(BorrowerEmail, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addGap(50, 50, 50)
                 .addGroup(Container4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(BarrowBook1)
@@ -1042,18 +1081,18 @@ public class Dashboard extends javax.swing.JFrame {
         BarrowerFormLayout.setHorizontalGroup(
             BarrowerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1322, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
         );
         BarrowerFormLayout.setVerticalGroup(
             BarrowerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(BarrowerFormLayout.createSequentialGroup()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 445, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
-        Container.add(BarrowerForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(100, 0, 970, 500));
+        Container.add(BarrowerForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         jPanel2.setBackground(new java.awt.Color(2, 30, 45));
         jPanel2.setMaximumSize(new java.awt.Dimension(500, 700));
@@ -1165,6 +1204,7 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void barrowedBooksActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_barrowedBooksActionPerformed
         // TODO add your handling code here:
+        this.showBorrowedBooklist();
         this.showBarrowedBooks();
     }//GEN-LAST:event_barrowedBooksActionPerformed
 
@@ -1187,10 +1227,6 @@ public class Dashboard extends javax.swing.JFrame {
     private void searchField2FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField2FocusGained
         // TODO add your handling code here:
     }//GEN-LAST:event_searchField2FocusGained
-
-    private void searchField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField3FocusGained
-        // TODO add your handling code here:
-    }//GEN-LAST:event_searchField3FocusGained
 
     private void logoutActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_logoutActionPerformed
         // TODO add your handling code here:
@@ -1311,13 +1347,15 @@ public class Dashboard extends javax.swing.JFrame {
 
             if (this.SaveEditBook.getText().equals("Barrow")) {
                 //promtp the baroow form
+                this.showBorrowersForm();
+                System.out.println(stockNumber);
                 if (stockNumber > 0) {
                     System.out.println("Promp the borrow form");
-                }
-                else {
+                    return;
+                } else {
                     JOptionPane.showMessageDialog(null, "No Stock For now!");
+                    return;
                 }
-                
 
             }
 
@@ -1336,17 +1374,90 @@ public class Dashboard extends javax.swing.JFrame {
         this.showBooksPanel();
     }//GEN-LAST:event_CloseBookFormActionPerformed
 
-    private void BorrowerFirstname1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrowerFirstname1ActionPerformed
+    private void BorrowerFirstnameActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BorrowerFirstnameActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_BorrowerFirstname1ActionPerformed
+    }//GEN-LAST:event_BorrowerFirstnameActionPerformed
 
     private void BarrowBook1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_BarrowBook1ActionPerformed
         // TODO add your handling code here:
+        int borrowerId = 0;
+        String firstname = BorrowerFirstname.getText();
+        String lastname = BorrowerLastname.getText();
+        String email = BorrowerEmail.getText();
+        if (!UserController.validateBorrower(firstname, lastname, email)) {
+            return;
+        }
+        try {
+            borrowerId = UserController.addBorrower(firstname, lastname, email);
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Something went wrong!");
+            return;
+        }
+
+        DefaultTableModel SelectedTable = (DefaultTableModel) SelectBook.getModel();
+        for (int i = 0; i < SelectedTable.getRowCount(); i++) {
+            boolean checked = (boolean) SelectedTable.getValueAt(i, 0);
+            if (checked) {
+                BookController.addBorrowedBook((int) SelectedTable.getValueAt(i, 1), borrowerId);
+            }
+        }
+        JOptionPane.showMessageDialog(null, "Successfully borrowed book/s!");
+        this.resetTableCheckbox();
+        this.showBorrowedBooklist();
+        this.showBarrowedBooks();
+
+        BorrowerFirstname.setText("");
+        BorrowerLastname.setText("");
+        BorrowerEmail.setText("");
     }//GEN-LAST:event_BarrowBook1ActionPerformed
 
     private void CloseBookForm2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_CloseBookForm2ActionPerformed
         // TODO add your handling code here:
+        this.showDashboardFirst();
     }//GEN-LAST:event_CloseBookForm2ActionPerformed
+
+    private void SelectBookMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_SelectBookMouseClicked
+        // TODO add your handling code here:
+        if (evt.getButton() == 1) {
+            boolean selected;
+            selected = (boolean) SelectBook.getValueAt(SelectBook.getSelectedRow(), 0);
+            System.out.println(selected);
+            DefaultTableModel model = (DefaultTableModel) SelectBook.getModel();
+            model.setValueAt(!selected, SelectBook.getSelectedRow(), 0);
+            this.SelectBook.setModel(model);
+        }
+    }//GEN-LAST:event_SelectBookMouseClicked
+
+    private void searchField3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchField3ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchField3ActionPerformed
+
+    private void searchField3FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField3FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchField3FocusGained
+
+    private void BorrowedBookTableMouseClicked(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_BorrowedBookTableMouseClicked
+        // TODO add your handling code here:
+    }//GEN-LAST:event_BorrowedBookTableMouseClicked
+
+    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
+        // TODO add your handling code here:
+        this.showBorrowersForm();
+    }//GEN-LAST:event_jButton2ActionPerformed
+    /**
+     * Show the borrowed books and the borrower
+     */
+    private void showBorrowedBooklist() {
+        ArrayList<BorrowedBook> borrowedBooks = BookController.getBorrowedBooks();
+        DefaultTableModel borrowedTableModel = (DefaultTableModel) BorrowedBookTable.getModel();
+        borrowedTableModel.setRowCount(0);
+        this.BorrowedBookTable.setModel(borrowedTableModel);
+        for (BorrowedBook bookBorrow : borrowedBooks) {
+            borrowedTableModel.addRow(new Object[]{bookBorrow.getId(), bookBorrow.getTitle(),
+                bookBorrow.getBorrowerName(), bookBorrow.getDueDate(), bookBorrow.getIssueDate()});
+        }
+        this.BorrowedBookTable.setModel(borrowedTableModel);
+    }
 
     /**
      * This function will show the booklist on the right side
@@ -1367,7 +1478,7 @@ public class Dashboard extends javax.swing.JFrame {
             dataModel.addRow(new Object[]{book.getTitle(), book.getAuthor()});
             dataModelv2.addRow(new Object[]{book.getId(), book.getTitle(), book.getAuthor(), book.getGenre(),
                 book.getYear_published(), book.getStock_number()});
-            dataModelv3.addRow(new Object[]{false,book.getId(),book.getTitle()});
+            dataModelv3.addRow(new Object[]{false, book.getId(), book.getTitle()});
         }
         Table.setModel(dataModel);
         SelectBook.setModel(dataModelv3);
@@ -1385,6 +1496,8 @@ public class Dashboard extends javax.swing.JFrame {
         this.Books.setVisible(false);
         this.BarrowedBooks.setVisible(false);
         this.AddEditBookForm.setVisible(false);
+        this.BarrowerForm.setVisible(false);
+
     }
 
     /**
@@ -1395,6 +1508,7 @@ public class Dashboard extends javax.swing.JFrame {
         this.Books.setVisible(true);
         this.BarrowedBooks.setVisible(false);
         this.AddEditBookForm.setVisible(false);
+        this.BarrowerForm.setVisible(false);
 
     }
 
@@ -1406,6 +1520,8 @@ public class Dashboard extends javax.swing.JFrame {
         this.Books.setVisible(false);
         this.BarrowedBooks.setVisible(false);
         this.AddEditBookForm.setVisible(true);
+        this.BarrowerForm.setVisible(false);
+
     }
 
     /**
@@ -1416,6 +1532,26 @@ public class Dashboard extends javax.swing.JFrame {
         this.Books.setVisible(false);
         this.BarrowedBooks.setVisible(true);
         this.AddEditBookForm.setVisible(false);
+        this.BarrowerForm.setVisible(false);
+    }
+
+    /**
+     * This function show only the borrowers form
+     */
+    private void showBorrowersForm() {
+        this.dashboardPanel.setVisible(false);
+        this.Books.setVisible(false);
+        this.BarrowedBooks.setVisible(false);
+        this.AddEditBookForm.setVisible(false);
+        this.BarrowerForm.setVisible(true);
+    }
+
+    private void resetTableCheckbox() {
+        DefaultTableModel model = (DefaultTableModel) SelectBook.getModel();
+        for (int i = 0; i < model.getRowCount(); i++) {
+            model.setValueAt(false, i, 0);
+        }
+        SelectBook.setModel(model);
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
@@ -1439,9 +1575,10 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JTextField BookYearField;
     private javax.swing.JPanel Books;
     private javax.swing.JTable BooksListTable;
-    private javax.swing.JTextField BorrowerEmail1;
-    private javax.swing.JTextField BorrowerFirstname1;
-    private javax.swing.JTextField BorrowerLastname1;
+    private javax.swing.JTable BorrowedBookTable;
+    private javax.swing.JTextField BorrowerEmail;
+    private javax.swing.JTextField BorrowerFirstname;
+    private javax.swing.JTextField BorrowerLastname;
     private javax.swing.JButton CloseBookForm;
     private javax.swing.JButton CloseBookForm2;
     private javax.swing.JPanel Container;
@@ -1456,6 +1593,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JButton dashboard;
     private javax.swing.JPanel dashboardPanel;
     private javax.swing.JButton jButton1;
+    private javax.swing.JButton jButton2;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -1495,7 +1633,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
-    private javax.swing.JTable jTable2;
     private javax.swing.JButton logout;
     private javax.swing.JLabel mstBBAuthor;
     private javax.swing.JLabel mstBBGenre;
@@ -1503,8 +1640,8 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel mstBBYear;
     private javax.swing.JButton search;
     private javax.swing.JButton search2;
-    private javax.swing.JButton search3;
     private javax.swing.JButton search4;
+    private javax.swing.JButton searchBorrowedBook;
     private javax.swing.JTextField searchField;
     private javax.swing.JTextField searchField2;
     private javax.swing.JTextField searchField3;
