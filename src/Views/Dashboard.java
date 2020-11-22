@@ -174,10 +174,20 @@ public class Dashboard extends javax.swing.JFrame {
                 searchFieldFocusGained(evt);
             }
         });
+        searchField.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchFieldActionPerformed(evt);
+            }
+        });
 
         search.setBackground(new java.awt.Color(102, 102, 102));
         search.setForeground(new java.awt.Color(255, 255, 255));
         search.setText("Search");
+        search.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel6Layout = new javax.swing.GroupLayout(jPanel6);
         jPanel6.setLayout(jPanel6Layout);
@@ -513,6 +523,11 @@ public class Dashboard extends javax.swing.JFrame {
         searchBorrowedBook.setBackground(new java.awt.Color(102, 102, 102));
         searchBorrowedBook.setForeground(new java.awt.Color(255, 255, 255));
         searchBorrowedBook.setText("Search");
+        searchBorrowedBook.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                searchBorrowedBookActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel8Layout = new javax.swing.GroupLayout(jPanel8);
         jPanel8.setLayout(jPanel8Layout);
@@ -641,7 +656,7 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(jPanel9Layout.createSequentialGroup()
                 .addGap(18, 18, 18)
                 .addComponent(jLabel13, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 371, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 361, Short.MAX_VALUE)
                 .addComponent(searchField4, javax.swing.GroupLayout.PREFERRED_SIZE, 221, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(search4)
@@ -836,7 +851,7 @@ public class Dashboard extends javax.swing.JFrame {
         Container.add(AddEditBookForm, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
 
         BarrowerForm.setBackground(new java.awt.Color(153, 153, 153));
-        BarrowerForm.setPreferredSize(new java.awt.Dimension(960, 650));
+        BarrowerForm.setPreferredSize(new java.awt.Dimension(970, 500));
 
         jPanel12.setBackground(new java.awt.Color(102, 102, 102));
 
@@ -851,14 +866,14 @@ public class Dashboard extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(jLabel16, javax.swing.GroupLayout.PREFERRED_SIZE, 214, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(553, 553, 553))
+                .addGap(401, 401, 401))
         );
         jPanel12Layout.setVerticalGroup(
             jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel12Layout.createSequentialGroup()
-                .addContainerGap(28, Short.MAX_VALUE)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addGap(19, 19, 19)
                 .addComponent(jLabel16)
-                .addGap(18, 18, 18))
+                .addContainerGap(27, Short.MAX_VALUE))
         );
 
         jPanel13.setBackground(new java.awt.Color(255, 255, 255));
@@ -1081,7 +1096,7 @@ public class Dashboard extends javax.swing.JFrame {
         BarrowerFormLayout.setHorizontalGroup(
             BarrowerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addComponent(jPanel12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-            .addComponent(jPanel13, javax.swing.GroupLayout.DEFAULT_SIZE, 1129, Short.MAX_VALUE)
+            .addComponent(jPanel13, javax.swing.GroupLayout.PREFERRED_SIZE, 971, javax.swing.GroupLayout.PREFERRED_SIZE)
         );
         BarrowerFormLayout.setVerticalGroup(
             BarrowerFormLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -1290,20 +1305,7 @@ public class Dashboard extends javax.swing.JFrame {
     private void search2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_search2ActionPerformed
         // TODO add your handling code here:
         String searchedBook = this.searchField2.getText().trim().toLowerCase();
-        ArrayList<Book> books = BookController.getBooks();
-        for (Book book : books) {
-            if (searchedBook.equals(book.getTitle().toLowerCase())) {
-                this.BookTitleField.setText(book.getTitle());
-                this.BookAuthorField.setText(book.getAuthor());
-                this.BookGenreField.setText(book.getGenre());
-                this.BookYearField.setText(book.getYear_published().toString());
-                this.BockStockField.setText(Integer.toString(book.getStock_number()));
-                this.SaveEditBook.setText("Barrow");
-                this.showAddBookForm();
-                return;
-            }
-        }
-        JOptionPane.showMessageDialog(null, "No Book Found!");
+        this.searchBook(searchedBook);
     }//GEN-LAST:event_search2ActionPerformed
 
     private void searchField4FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField4FocusGained
@@ -1444,6 +1446,54 @@ public class Dashboard extends javax.swing.JFrame {
         // TODO add your handling code here:
         this.showBorrowersForm();
     }//GEN-LAST:event_jButton2ActionPerformed
+
+    private void searchActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchActionPerformed
+        // TODO add your handling code here:
+        String title = this.searchField.getText();
+        this.searchBook(title);
+    }//GEN-LAST:event_searchActionPerformed
+
+    private void searchFieldActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchFieldActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_searchFieldActionPerformed
+
+    private void searchBorrowedBookActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_searchBorrowedBookActionPerformed
+        // TODO add your handling code here:
+        String title = this.searchField3.getText().toLowerCase().trim();
+        ArrayList<BorrowedBook> borrwedBooks = BookController.getBorrowedBooks();
+        for(BorrowedBook book: borrwedBooks){
+           if(title.equals(book.getTitle().toLowerCase())){
+               //temporary
+               JOptionPane.showMessageDialog(null, String.format("book title: $s\nborrower: $s",
+                       book.getTitle(),book.getBorrowerName()));
+               break;
+           }
+        }
+        JOptionPane.showMessageDialog(null, "No book found!");
+    }//GEN-LAST:event_searchBorrowedBookActionPerformed
+    
+    
+    /**
+     * This function will search a book
+     */
+    private void searchBook(String bookTitle){
+         ArrayList<Book> books = BookController.getBooks();
+        for (Book book : books) {
+            if (bookTitle.equals(book.getTitle().toLowerCase())) {
+                this.BookTitleField.setText(book.getTitle());
+                this.BookAuthorField.setText(book.getAuthor());
+                this.BookGenreField.setText(book.getGenre());
+                this.BookYearField.setText(book.getYear_published().toString());
+                this.BockStockField.setText(Integer.toString(book.getStock_number()));
+                this.SaveEditBook.setText("Barrow");
+                this.showAddBookForm();
+                return;
+            }
+        }
+        JOptionPane.showMessageDialog(null, "No Book Found!");
+    }
+        
+    
     /**
      * Show the borrowed books and the borrower
      */
