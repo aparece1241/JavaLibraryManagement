@@ -103,7 +103,23 @@ public class BookController {
             System.err.println(ex.getMessage());
         }
     }
-
+    //update book stock number
+    public static void updateStockNumber(int id, int newStockNumber){
+        try{
+            String query = "UPDATE `book` SET stockNumber=? WHERE bookId=?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(query);
+            preparedStatement.setInt(1, newStockNumber);
+            preparedStatement.setInt(2, id);
+            preparedStatement.execute();
+            
+            Db_Connection.close(preparedStatement);
+            retrieveAfter();
+            System.out.println("Successfully updated!");
+        }catch(SQLException ex){
+            System.err.println(ex.getMessage());
+        }
+    }
+        
     public static void deleteBook(int id) {
         try {
             String query = "DELETE FROM `book` WHERE bookId=?";
