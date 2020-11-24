@@ -14,6 +14,8 @@ import Utilities.Db_Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Calendar;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -43,6 +45,22 @@ public class Dashboard extends javax.swing.JFrame {
         if (authuser != null) {
             this.username.setText(authuser.getFirstname() + " " + authuser.getLastname());
         }
+        Book mostBorrowedBook = BookController.getBookById(BookController.getMostBorrowedBook());
+        this.mstBBTitle.setText(mostBorrowedBook.getTitle());
+        this.mstBBAuthor.setText(mostBorrowedBook.getAuthor());
+        this.mstBBGenre.setText(mostBorrowedBook.getGenre());
+        this.mstBBYear.setText(mostBorrowedBook.getYear_published().toGMTString());
+
+        ArrayList<Book> leteralBooks = BookController.getArrayBook();
+        Book bookOfDay = BookController.getBookById((int) (leteralBooks.size() * Math.random()));
+
+        this.BDTitle.setText(bookOfDay.getTitle());
+        this.BDAuthor.setText(bookOfDay.getAuthor());
+        this.BDGenre.setText(bookOfDay.getGenre());
+        this.BDYear.setText(bookOfDay.getYear_published().toString());
+
+        Book latestBook = BookController.getBookById(leteralBooks.get(leteralBooks.size() - 1).getId());
+        this.latestBook.setText("The newest book today " + latestBook.getTitle());
     }
 
     /**
@@ -76,7 +94,7 @@ public class Dashboard extends javax.swing.JFrame {
         BDGenre = new javax.swing.JLabel();
         jScrollPane1 = new javax.swing.JScrollPane();
         Table = new javax.swing.JTable();
-        jLabel3 = new javax.swing.JLabel();
+        latestBook = new javax.swing.JLabel();
         Books = new javax.swing.JPanel();
         jPanel7 = new javax.swing.JPanel();
         jLabel11 = new javax.swing.JLabel();
@@ -341,25 +359,23 @@ public class Dashboard extends javax.swing.JFrame {
         jScrollPane1.setViewportView(Table);
         Table.getColumnModel().getSelectionModel().setSelectionMode(javax.swing.ListSelectionModel.SINGLE_INTERVAL_SELECTION);
 
-        jLabel3.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
-        jLabel3.setForeground(new java.awt.Color(255, 255, 255));
-        jLabel3.setText("Latest Book !!!      Book Title");
+        latestBook.setFont(new java.awt.Font("Dialog", 1, 24)); // NOI18N
+        latestBook.setForeground(new java.awt.Color(255, 255, 255));
+        latestBook.setText("Latest Book !!!      Book Title");
 
         javax.swing.GroupLayout dashboardPanelLayout = new javax.swing.GroupLayout(dashboardPanel);
         dashboardPanel.setLayout(dashboardPanelLayout);
         dashboardPanelLayout.setHorizontalGroup(
             dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(dashboardPanelLayout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(32, Short.MAX_VALUE)
                 .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(dashboardPanelLayout.createSequentialGroup()
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 72, Short.MAX_VALUE))
-                    .addGroup(dashboardPanelLayout.createSequentialGroup()
                         .addComponent(jPanel3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(51, 51, 51)))
+                        .addGap(44, 44, 44)
+                        .addComponent(jPanel4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(latestBook, javax.swing.GroupLayout.PREFERRED_SIZE, 649, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(37, 37, 37)
                 .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 237, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
             .addComponent(jPanel6, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -377,9 +393,9 @@ public class Dashboard extends javax.swing.JFrame {
                         .addGroup(dashboardPanelLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(jPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jPanel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 34, Short.MAX_VALUE)
-                        .addComponent(jLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(25, 25, 25))))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addComponent(latestBook, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(29, 29, 29))))
         );
 
         Container.add(dashboardPanel, new org.netbeans.lib.awtextra.AbsoluteConstraints(50, 10, 970, 500));
@@ -1466,6 +1482,22 @@ public class Dashboard extends javax.swing.JFrame {
 
     private void dashboardActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_dashboardActionPerformed
         // TODO add your handling code here:
+        Book mostBorrowedBook = BookController.getBookById(BookController.getMostBorrowedBook());
+        this.mstBBTitle.setText(mostBorrowedBook.getTitle());
+        this.mstBBAuthor.setText(mostBorrowedBook.getAuthor());
+        this.mstBBGenre.setText(mostBorrowedBook.getGenre());
+        this.mstBBYear.setText(mostBorrowedBook.getYear_published().toGMTString());
+
+        ArrayList<Book> leteralBooks = BookController.getArrayBook();
+        Book bookOfDay = BookController.getBookById((int) (leteralBooks.size() * Math.random()));
+
+        this.BDTitle.setText(bookOfDay.getTitle());
+        this.BDAuthor.setText(bookOfDay.getAuthor());
+        this.BDGenre.setText(bookOfDay.getGenre());
+        this.BDYear.setText(bookOfDay.getYear_published().toString());
+
+        Book latestBook = BookController.getBookById(leteralBooks.get(leteralBooks.size() - 1).getId());
+        this.latestBook.setText("The newest book today " + latestBook.getTitle());
         this.showDashboardFirst();
     }//GEN-LAST:event_dashboardActionPerformed
 
@@ -1639,11 +1671,11 @@ public class Dashboard extends javax.swing.JFrame {
             if (title.equals(book.getTitle().toLowerCase())) {
                 //temporary
                 borrowBookModel.addRow(new Object[]{book.getId(), book.getTitle(), book.getBorrowerName(),
-                     book.getDueDate(), book.getIssueDate()});
+                    book.getDueDate(), book.getIssueDate()});
             }
         }
         this.BorrowedBookTable.setModel(borrowBookModel);
-        JOptionPane.showMessageDialog(null, (row <= 0)?"No book found!":"search result/s");
+        JOptionPane.showMessageDialog(null, (row <= 0) ? "No book found!" : "search result/s");
     }//GEN-LAST:event_searchBorrowedBookActionPerformed
 
     private void searchField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField5FocusGained
@@ -1732,7 +1764,46 @@ public class Dashboard extends javax.swing.JFrame {
 
         //this function here will check if the borrower will have a fine
         //it will also 
+        //get the current date
+        Calendar currentCDate = Calendar.getInstance();
+        Date currentDate = new Date(currentCDate.getTimeInMillis());
+        ArrayList<BorrowedBook> borrowedBooks = BookController.getBorrowedBooks();
+        ArrayList<Book> bookAll = BookController.getBooks();
 
+        String borrower = JOptionPane.showInputDialog("Enter borrower name: ");
+        int count = 0;
+
+        String bookTitlePlain = JOptionPane.showInputDialog("Enter book title\n(if multiple books please "
+                + "specify using comma\n no space between titles): ");
+        String[] bookTitles = bookTitlePlain.toLowerCase().split(",");
+
+        for (BorrowedBook book : borrowedBooks) {
+            if (book.getBorrowerName().toLowerCase().equals(borrower.toLowerCase())
+                    && Arrays.stream(bookTitles).anyMatch(book.getTitle().toLowerCase()::equals)) {
+                JOptionPane.showMessageDialog(this, (getFines(book.getDueDate(), currentDate)>0)?"You have "+getFines(book.getDueDate(), currentDate)+" beacuse of \n"
+                        + " not returning at the right time.":"Returned on time");
+                BookController.deleteBorrowedBookById(book.getId());
+                for(int i = 0;i<bookAll.size();i++){
+                    if(bookAll.get(i).getTitle().toLowerCase().equals(book.getTitle().toLowerCase())){
+                        BookController.updateStockNumber(bookAll.get(i).getId(), bookAll.get(i).getStock_number() +1);
+                        break;
+                    }
+                }
+                
+                if (count == bookTitles.length) {
+                    return;
+                }
+                count++;
+            }
+        }
+        if (count <= 0) {
+            JOptionPane.showMessageDialog(this, "The book did not exist!");
+
+        }else{
+         this.showBookList();
+         this.showBorrowedBooklist();
+         this.showBarrowedBooks();
+        }
     }//GEN-LAST:event_jButton3ActionPerformed
 
     private void jButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton4ActionPerformed
@@ -1895,6 +1966,55 @@ public class Dashboard extends javax.swing.JFrame {
         SelectBook.setModel(model);
     }
 
+    public static int getFines(Date dueDate, Date returnDate) {
+        int dueDay = getDay(dueDate);
+        int returnDay = getDay(returnDate);
+        int dueMonth = getMonth(dueDate);
+        int returnMonth = getMonth(returnDate);
+        int dueyear = getYear(dueDate);
+        int returnyear = getYear(returnDate);
+        int initialFine = 0;
+        int fines = 0;
+
+        if (returnyear - dueyear > 0) {
+            initialFine += (returnyear - dueyear) * 365;
+        }
+        if (returnMonth - dueMonth > 0) {
+            initialFine += (returnMonth - dueMonth) * 30;
+        }
+
+        if (returnDay - dueDay > 0) {
+            initialFine += (returnDay - dueDay) * 1;
+        }
+
+        fines = initialFine * 5;
+        return fines;
+    }
+
+    public static int getDay(Date dt) {
+        Calendar cd = Calendar.getInstance();
+
+        cd.setTime(dt);
+
+        return cd.get(Calendar.DAY_OF_MONTH);
+    }
+
+    public static int getMonth(Date dt) {
+        Calendar cd = Calendar.getInstance();
+
+        cd.setTime(dt);
+
+        return cd.get(Calendar.MONTH);
+    }
+
+    public static int getYear(Date dt) {
+        Calendar cd = Calendar.getInstance();
+
+        cd.setTime(dt);
+
+        return cd.get(Calendar.YEAR);
+    }
+
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton AddBook;
     private javax.swing.JPanel AddEditForm;
@@ -1962,7 +2082,6 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel27;
     private javax.swing.JLabel jLabel28;
     private javax.swing.JLabel jLabel29;
-    private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel30;
     private javax.swing.JLabel jLabel31;
     private javax.swing.JLabel jLabel32;
@@ -1993,6 +2112,7 @@ public class Dashboard extends javax.swing.JFrame {
     private javax.swing.JScrollPane jScrollPane2;
     private javax.swing.JScrollPane jScrollPane3;
     private javax.swing.JScrollPane jScrollPane4;
+    private javax.swing.JLabel latestBook;
     private javax.swing.JButton logout;
     private javax.swing.JLabel mstBBAuthor;
     private javax.swing.JLabel mstBBGenre;

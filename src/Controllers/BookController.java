@@ -57,6 +57,29 @@ public class BookController {
         return books;
     }
 
+    public static Book getBookById(int id) {
+        Book book = new Book();
+        try {
+            String query = "SELECT * FROM `book` WHERE bookId=?";
+            PreparedStatement preparedStatement = dbConnection.prepareStatement(query);
+            preparedStatement.setInt(1, id);
+            ResultSet rs = preparedStatement.executeQuery();
+            if (rs.next()) {
+                book.setId(rs.getInt("bookId"));
+                book.setTitle(rs.getString("title"));
+                book.setAuthor(rs.getString("author"));
+                book.setGenre(rs.getString("genre"));
+                book.setYear_published(rs.getDate("yearPublished"));
+                book.setStock_number(rs.getInt("stockNumber"));
+            }
+            Db_Connection.close(preparedStatement);
+            Db_Connection.close(rs);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return book;
+    }
+
     public static void addBook(String author, String genre, String title,
             Date yearPublished, int stockNumber) {
 
@@ -103,23 +126,24 @@ public class BookController {
             System.err.println(ex.getMessage());
         }
     }
+
     //update book stock number
-    public static void updateStockNumber(int id, int newStockNumber){
-        try{
+    public static void updateStockNumber(int id, int newStockNumber) {
+        try {
             String query = "UPDATE `book` SET stockNumber=? WHERE bookId=?";
             PreparedStatement preparedStatement = dbConnection.prepareStatement(query);
             preparedStatement.setInt(1, newStockNumber);
             preparedStatement.setInt(2, id);
             preparedStatement.execute();
-            
+
             Db_Connection.close(preparedStatement);
             retrieveAfter();
             System.out.println("Successfully updated!");
-        }catch(SQLException ex){
+        } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
     }
-        
+
     public static void deleteBook(int id) {
         try {
             String query = "DELETE FROM `book` WHERE bookId=?";
@@ -164,6 +188,19 @@ public class BookController {
         return borrowedBooks;
     }
 
+    public static void deleteBorrowedBookById(int id) {
+        try {
+            String query = "DELETE FROM `borrowedbooks` WHERE id=?";
+             PreparedStatement preparedStatement = dbConnection.prepareStatement(query, Statement.RETURN_GENERATED_KEYS);
+            preparedStatement.setInt(1, id);
+            preparedStatement.execute();
+            System.out.println("Successfully deleted!");
+            Db_Connection.close(preparedStatement);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+    }
+
     public static void deleteBorrowedBook(int borrowerId) {
         try {
             String query = "DELETE FROM `borrowedbooks` WHERE `borrowerId=?`";
@@ -198,6 +235,25 @@ public class BookController {
         } catch (SQLException ex) {
             System.err.println(ex.getMessage());
         }
+    }
+
+    //get the most borrowed book
+    public static int getMostBorrowedBook() {
+        int id = 0;
+        try {
+            String query = "SELECT `bookId`, count FROM "
+                    + "(SELECT `bookId`, count(*) as count FROM borrowedbooks group by bookId)"
+                    + " as ct order by count DESC Limit 1";
+            Statement stmt = dbConnection.createStatement();
+            ResultSet rs = stmt.executeQuery(query);
+            if (rs.next()) {
+                id = rs.getInt("bookId");
+            }
+            Db_Connection.close(rs);
+        } catch (SQLException ex) {
+            System.err.println(ex.getMessage());
+        }
+        return id;
     }
 
     public static ArrayList<Book> getArrayBook() {
