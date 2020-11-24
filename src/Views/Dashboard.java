@@ -1672,10 +1672,11 @@ public class Dashboard extends javax.swing.JFrame {
                 //temporary
                 borrowBookModel.addRow(new Object[]{book.getId(), book.getTitle(), book.getBorrowerName(),
                     book.getDueDate(), book.getIssueDate()});
+                row++;
             }
         }
         this.BorrowedBookTable.setModel(borrowBookModel);
-        JOptionPane.showMessageDialog(null, (row <= 0) ? "No book found!" : "search result/s");
+        JOptionPane.showMessageDialog(null, (row <= 0) ? "No book found!" : "successfully searched!");
     }//GEN-LAST:event_searchBorrowedBookActionPerformed
 
     private void searchField5FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_searchField5FocusGained
